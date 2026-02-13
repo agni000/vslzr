@@ -7,6 +7,7 @@
 #include <math.h>
 #include <stdatomic.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #define WIDTH 900
 #define HEIGHT 600 
@@ -21,6 +22,9 @@ typedef struct {
 MusicBuffer globalSamplesBuffer[2] = {0}; 
 _Atomic int writeIndex = 0;
 _Atomic int readIndex = 1;  
+
+bool showLeftCh = true; 
+bool showRightCh = true; 
 
 void renderSamples();
 void processorCallback(void *bufferData, unsigned int frames);
@@ -64,6 +68,20 @@ int main(int argc, char *argv[]) {
       break; 
     }
 
+    if (IsKeyPressed(KEY_L)) {
+      showLeftCh = !showLeftCh; 
+    }
+
+    if (IsKeyPressed(KEY_R)) {
+      showRightCh = !showRightCh; 
+    }
+    
+    const char *leftStatus = showLeftCh ? "ON" : "OFF";
+    const char *rightStatus = showRightCh ? "ON" : "OFF";
+    DrawText(TextFormat("Left (L): %s", leftStatus), 10, 10, 20, RED);
+    DrawText(TextFormat("Right (R): %s", rightStatus), 10, 35, 20, BLUE);
+    DrawText("Space: Play/Pause | Q: Quit", 10, HEIGHT - 30, 20, DARKGRAY);
+    
     EndDrawing(); 
   }
  
@@ -101,7 +119,7 @@ void processorCallback(void *bufferData, unsigned int frames) {
  */
 void renderSamples() {
   int width = GetRenderWidth();
-  int height = GetRenderHeight();  
+  int height = GetRenderHeight();
 
   int ri = atomic_load_explicit(&readIndex, memory_order_acquire);
   size_t frames = atomic_load_explicit(&globalSamplesBuffer[ri].framesCount, memory_order_acquire);
@@ -116,16 +134,20 @@ void renderSamples() {
     float rsNorm = globalSamplesBuffer[ri].samples[(i * 2) + 1];
 
     float xRecStart = recProp * i; 
-   
-    if (lsNorm > 0) { 
-      DrawRectangle(xRecStart, ceilf((height / 2) - (height / 2) * lsNorm), 1, (height / 2) * lsNorm, RED); 
-    } else {
-      DrawRectangle(xRecStart, ceilf((height / 2) - (height / 2) * fabs(lsNorm)), 1, (height / 2) * fabs(lsNorm), RED);
+    
+    if (showLeftCh) {
+      if (lsNorm > 0) { 
+        DrawRectangle(xRecStart, ceilf((height / 2) - (height / 2) * lsNorm), 1, (height / 2) * lsNorm, RED); 
+      } else {
+        DrawRectangle(xRecStart, ceilf((height / 2) - (height / 2) * fabs(lsNorm)), 1, (height / 2) * fabs(lsNorm), RED);
+      }
     }
-    if (rsNorm > 0) { 
-      DrawRectangle(xRecStart, ceilf((height / 2)), 1, (height / 2) * rsNorm, BLUE); 
-    } else {
-      DrawRectangle(xRecStart, ceilf((height / 2)), 1, (height / 2) * fabs(rsNorm), BLUE);
+    if (showRightCh) {
+      if (rsNorm > 0) { 
+        DrawRectangle(xRecStart, ceilf((height / 2)), 1, (height / 2) * rsNorm, BLUE); 
+      } else {
+        DrawRectangle(xRecStart, ceilf((height / 2)), 1, (height / 2) * fabs(rsNorm), BLUE);
+      }
     }
   }
 }
