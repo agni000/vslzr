@@ -80,8 +80,7 @@ int main(int argc, char *argv[]) {
     const char *rightStatus = showRightCh ? "ON" : "OFF";
     DrawText(TextFormat("Left (L): %s", leftStatus), 10, 10, 20, RED);
     DrawText(TextFormat("Right (R): %s", rightStatus), 10, 35, 20, BLUE);
-    DrawText("Space: Play/Pause | Q: Quit", 10, HEIGHT - 30, 20, DARKGRAY);
-    
+   
     EndDrawing(); 
   }
  

@@ -25,7 +25,7 @@ Add a file inside <code>assets/</code> and then run the executable:
 
 - SPACE: Pause/Resume
 - Q/ESC: Quit
-- L: Toggle left channe
+- L: Toggle left channel
 - R: Toggle right channel 
 
 ## TODO
