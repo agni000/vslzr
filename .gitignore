@@ -1,0 +1,5 @@
+assets/
+bin/
+*.o
+*.out
+vslzr
