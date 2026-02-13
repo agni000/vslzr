@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
  
     BeginDrawing(); 
     ClearBackground(WHITE);
+    
     renderSamples(); 
 
     if (IsKeyPressed(KEY_SPACE)) {
@@ -75,7 +76,7 @@ int main(int argc, char *argv[]) {
 }
 
 /*@brief Callback function to process audio
-  @params bufferData, as far as I know, contains the interleaved samples (frames * 2 size in this case), e.g. [LRLRLR...];
+  @params bufferData contains the interleaved samples (frames * 2 size in this case), e.g. [LRLRLR...];
           frames is the number of frames 
   */
 void processorCallback(void *bufferData, unsigned int frames) { 
@@ -115,9 +116,7 @@ void renderSamples() {
     float rsNorm = globalSamplesBuffer[ri].samples[(i * 2) + 1];
 
     float xRecStart = recProp * i; 
-    //float xRecEnd = recProp * (i + 1); 
-    //float recWidth = xRecEnd - xRecStart; 
-    
+   
     if (lsNorm > 0) { 
       DrawRectangle(xRecStart, ceilf((height / 2) - (height / 2) * lsNorm), 1, (height / 2) * lsNorm, RED); 
     } else {
