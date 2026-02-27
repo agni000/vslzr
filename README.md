@@ -34,8 +34,12 @@ Add a file inside <code>assets/</code> and then run the executable:
 
 ## TODO
 
-- Add frequency spectrum option (Fast Fourier Transform);
-- Improve/simplify buffer swapping logic;
+- ~~Add frequency spectrum option (Fast Fourier Transform)~~;
+- Optimize fft; 
+- Improve buffer swapping logic;
+- Remove potential thread issues; 
+- Support drag and drop; 
+- Implement music queue;
 
 ## License
 
