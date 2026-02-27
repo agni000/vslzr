@@ -4,7 +4,7 @@ A music visualizer built in Raylib. The program loads a stereo music file and re
 
 ## Demo
 
-https://github.com/user-attachments/assets/5dbdbe2a-c71b-441f-9899-764ba617bfe7
+https://github.com/user-attachments/assets/e10c05b8-9a04-4e42-895c-fde31642520a
 
 ## Requirements
 
