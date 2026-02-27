@@ -1,6 +1,6 @@
 # vslzr
 
-A music visualizer built in Raylib. The program loads a stereo music file and renders the left and right audio channels as waveforms (red and blue).
+A music visualizer built in Raylib. The program loads a stereo music file and renders the left and right audio channels as waveforms (red and blue) and the frequency spectrum for the left and right.
 
 ## Demo
 
