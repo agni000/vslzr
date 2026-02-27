@@ -10,7 +10,7 @@ SRC = $(SRC_DIR)/vslzr.c
 
 # Build
 build: $(ASSETS_DIR)
-	$(CC) $(SRC) -o $(TARGET) $(CFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
 
 $(ASSETS_DIR):
 	mkdir -p $(ASSETS_DIR)
